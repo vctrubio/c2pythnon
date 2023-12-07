@@ -14,11 +14,13 @@ def create_phone_number_v3(n):
     n = ''.join(map(str,n))
     return '(%s) %s-%s'%(n[:3], n[3:6], n[6:])
 
-#####################################################################################
+ft_call_0712 = {
+    'v1': create_phone_numbers_v1,
+    'v2': create_phone_number_v2,
+    'v3': create_phone_number_v3,
+}
 
-ft_call = {
-    'cv1' : create_phone_numbers_v1
-    }
+####################
 
 def debug_station(*args):
     for i in args:
@@ -27,9 +29,18 @@ def debug_station(*args):
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
     try:
-        print(sys.argv[0])
-        debug_station(sys.argv)
-    except Exception:
-        print("ERROR: no argv")
+        if (len(sys.argv) <= 1):
+            raise Exception ("!argc")
+        else:
+            debug_station(sys.argv)
+            ft_name = sys.argv[1]
+            print(ft_name)
+            if ft_name in ft_call_0712:
+                print("found ft_call-")
+            else:
+                raise Exception ("No ft_call- found")
+
+    except Exception as e:
+        print(e)
 
 
