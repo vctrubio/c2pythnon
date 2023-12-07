@@ -2,7 +2,6 @@ import sys
 import libft
 
 ## create_phone_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) # => returns "(123) 456-7890"
-
 def debug_station(*args):
     for i in args:
         print(i)
@@ -56,6 +55,10 @@ ft_call_0512 = {
 ## to_capitalize
 def to_jaden_case(string):
     return ' '.join([word.capitalize() for word in string.split()])
+
+## An isogram is a word that has no repeating letters
+def is_isogram(s):
+   return len(set(s.lower())) == len(s.lower())
 
 ## function_callers
 def ft_0712(create_phone_number_v, phone_numer):
