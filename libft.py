@@ -1,7 +1,4 @@
-import sys
 import os
-
-os.system("")
 
 class style():
     BLACK = '\033[30m'
