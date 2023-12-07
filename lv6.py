@@ -53,8 +53,10 @@ ft_date = {
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] in ft_date:
-            if len(sys.argv) == 4:
+            try:
                 ft_date[sys.argv[1]](sys.argv[2], sys.argv[3])
+            except:
+                print(libft.style.RED + "could not call function" + libft.style.RESET)
         else:
             print(libft.style.RED + sys.argv[1] + libft.style.RESET + " : not in ft_date_index")
     else:
