@@ -1,4 +1,5 @@
 import sys
+import libft
 
 ## create_phone_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) # => returns "(123) 456-7890"
 
@@ -26,20 +27,32 @@ def debug_station(*args):
     for i in args:
         print(i)
 
-#=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
-if __name__ == "__main__":
-        if (len(sys.argv) <= 1):
-            raise Exception ("!argc")
+def ft_0712(phone_number_version, phone_number):
     try:
+        if (len(sys.argv) != 3):
+            raise Exception ("!argc")
+        else:
             debug_station(sys.argv)
             ft_name = sys.argv[1]
-            print(ft_name)
             if ft_name in ft_call_0712:
                 print("found ft_call-")
+                rtn_ft_call = ft_call_0712[ft_name] 
             else:
                 raise Exception ("No ft_call- found")
-
     except Exception as e:
         print(e)
 
+ft_date = {
+    '0712': ft_0712,
+}
 
+#=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        if sys.argv[1] in ft_date:
+            print("found in date")
+        else:
+            print(libft.style.RED + sys.argv[1] + libft.style.RESET + " : not in ft_date_index")
+    else:
+        print("usage: argc1= ft_you_want_to_call, arg2+= arguments_for_given_function")
