@@ -28,10 +28,9 @@ def debug_station(*args):
 
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
-    try:
         if (len(sys.argv) <= 1):
             raise Exception ("!argc")
-        else:
+    try:
             debug_station(sys.argv)
             ft_name = sys.argv[1]
             print(ft_name)
