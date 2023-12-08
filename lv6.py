@@ -99,6 +99,18 @@ def openOrSenior_v2(data):
 def openOrSenior_v3(data):
   return ["Senior" if age >= 55 and handicap >= 8 else "Open" for (age, handicap) in data]
 
+# checkig pin
+def validate_pin_v1(pin):
+    return len(pin) in (4, 6) and pin.isdigit()
+
+def validate_pin_v2(pin):
+    return len(pin) in (4, 6) and pin.isdigit()
+
+def validate_pin_v3(pin):
+    return pin.isdigit() and (len(pin) == 4 or len(pin) == 6)
+
+validate_pin = lambda pin: len(pin) in (4, 6) and pin.isdigit()
+
 
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
