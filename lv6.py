@@ -89,6 +89,17 @@ ft_date = {
     '0512': ft_0512,
 }
 
+# Unpacking list
+def openOrSenior_v1(data):
+    return map(lambda d: 'Senior' if d[0] >= 55 and d[1] > 7 else 'Open', data)
+
+def openOrSenior_v2(data):
+    return ['Senior' if x[0] > 54 and x[1] > 7 else 'Open' for x in data]
+
+def openOrSenior_v3(data):
+  return ["Senior" if age >= 55 and handicap >= 8 else "Open" for (age, handicap) in data]
+
+
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
     if len(sys.argv) > 1:
