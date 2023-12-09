@@ -111,6 +111,21 @@ def validate_pin_v3(pin):
 
 validate_pin = lambda pin: len(pin) in (4, 6) and pin.isdigit()
 
+# finding the next ascii value missing
+def find_missing_letter_v1(chars):
+    ptr = chars[0]
+    for i in chars[1:]:
+        print(ptr, " = ", i)
+        if ord(ptr) + 1 != ord(i):
+            return chr(ord(ptr) + 1)
+        ptr = i 
+        
+def find_missing_letter_v2(chars):
+    for prev, current in zip(chars, chars[1:]):
+        if ord(prev) + 1 != ord(current):
+            return chr(ord(prev) + 1)
+
+
 
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
