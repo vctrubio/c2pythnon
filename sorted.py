@@ -15,24 +15,6 @@ roman_numerals = {1000: 'M',
                   1: 'I'
                   }
 
-
-class Student:
-    def __init__(self, name, grade, age):
-        self.name = name
-        self.grade = grade
-        self.age = age
-
-    def __repr__(self):
-        return repr((self.name, self.grade, self.age))
-
-
-student_objects = [
-    Student('john', 'A', 15),
-    Student('jane', 'B', 12),
-    Student('dave', 'B', 10),
-]
-
-
 def test_sort():
     global roman_numerals
     arr = []
@@ -58,6 +40,30 @@ def test_sort():
     print(a4)
     print(a5)
 
+
+# sort by int in word: to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+
+def order_v1(words):
+  return ' '.join(sorted(words.split(), key=lambda w:sorted(w)))
+
+def order_v2(sentence):
+    result = []
+    split_up = sentence.split() #the original sentence turned into a list
+    for i in range(1,10):
+        for item in split_up:
+            if str(i) in item:
+                 result.append(item)    #adds them in numerical order since it cycles through i first
+    return " ".join(result)
+
+def extract_number(word):
+    for l in word: 
+        if l.isdigit(): return int(l)
+    return None
+def order_v3(sentence):
+    return ' '.join(sorted(sentence.split(), key=extract_number))
+
+def order_v4(sentence):
+  return " ".join(sorted(sentence.split(), key=min))
 
 if __name__ == '__main__':
     test_sort()
