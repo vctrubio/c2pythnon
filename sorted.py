@@ -1,3 +1,5 @@
+from operator import itemgetter, attrgetter
+
 roman_numerals = {1000: 'M',
                   900: 'CM',
                   500: 'D',
@@ -32,6 +34,7 @@ def test_sort():
     print("-- --")
 
     a4 = sorted(a3, key=lambda ptr: ptr[0]) # , reverse=True (can append)
+    a4 = sorted(a3, key=itemgetter(1)) # , reverse=True (can append)
     a5 = sorted(a3, key=lambda word: next(key for key, value in roman_numerals.items() if value == word))
     print(a4)
     print(a5)
