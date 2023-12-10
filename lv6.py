@@ -84,10 +84,6 @@ def ft_0512(version, str):
     except:
         print(libft.style.RED + "[0512] could not call function" + libft.style.RESET)
 
-ft_date = {
-    '0712': ft_0712,
-    '0512': ft_0512,
-}
 
 # Unpacking list
 def openOrSenior_v1(data):
@@ -124,8 +120,11 @@ def find_missing_letter_v2(chars):
     for prev, current in zip(chars, chars[1:]):
         if ord(prev) + 1 != ord(current):
             return chr(ord(prev) + 1)
-
-
+ 
+ft_date = {
+    '0712': ft_0712,
+    '0512': ft_0512,
+}
 
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
 if __name__ == "__main__":
