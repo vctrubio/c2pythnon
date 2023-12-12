@@ -121,9 +121,40 @@ def find_missing_letter_v2(chars):
         if ord(prev) + 1 != ord(current):
             return chr(ord(prev) + 1)
  
+# string find to split if upper
+def hasC(char):
+    return char.isupper()
+
+def to_upper_str_v1(s):
+    result = ""
+    for char in s:
+        if hasC(char):
+            result += " " + char
+        else:
+            result += char
+    return result
+
+def ft_1212(version, str):
+    print(ft_1212.__name__)
+    try:
+        if version in ft_call_1212:
+            rtn_ft_call = ft_call_1212[version]
+            parsed_str = rtn_ft_call(str)
+            print(libft.style.GREEN + "√" + libft.style.RESET + parsed_str)
+    except:
+        print(libft.style.RED + "[1212] could not call function" + libft.style.RESET)
+
+ft_call_1212 = {
+    'v1': to_upper_str_v1,
+    'v2': to_upper_str_v2,
+    'v3': to_upper_str_v3,
+}
+
+####################################
 ft_date = {
     '0712': ft_0712,
     '0512': ft_0512,
+    '1212': ft_1212,
 }
 
 #=> take 2 arguments from the command line, one to state what function to call, the other to pass a string to that function
