@@ -134,6 +134,9 @@ def to_upper_str_v1(s):
             result += char
     return result
 
+def to_upper_str_v2(s):
+    return ''.join(' ' + c if c.isupper() else c for c in s)
+
 def ft_1212(version, str):
     print(ft_1212.__name__)
     try:
@@ -147,7 +150,6 @@ def ft_1212(version, str):
 ft_call_1212 = {
     'v1': to_upper_str_v1,
     'v2': to_upper_str_v2,
-    'v3': to_upper_str_v3,
 }
 
 ####################################
