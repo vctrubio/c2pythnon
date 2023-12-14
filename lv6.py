@@ -152,6 +152,18 @@ ft_call_1212 = {
     'v2': to_upper_str_v2,
 }
 
+# expand 716 to 700 + 10 + 6
+def expanded_int(num):
+    num_str = str(num)
+    expanded_digits = []
+    for i, digit in enumerate(reversed(num_str)):
+        # If the digit is not zero, add it to the expanded form with appropriate zeros
+        if digit != '0':
+            expanded_digits.append(str(int(digit) * 10**i))
+    expanded_digits.reverse()
+    result = ' + '.join(expanded_digits)
+    return result
+
 ####################################
 ft_date = {
     '0712': ft_0712,
