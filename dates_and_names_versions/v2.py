@@ -94,5 +94,5 @@ if __name__ == '__main__':
     # name.show_all_days()
 
     nd = Day(22,10,None,None,None,name)
-    print(nd)
+    print(myDay)
 
