@@ -179,6 +179,35 @@ def tower_builder(n_floors):
     
     return result
 
+# Generator of hashtag by eliminating the whitespaces
+# Map-> the string into words, capitalize each word, and join them back without extra whitespace
+cap_word = lambda string: ''.join(map(lambda word: word.capitalize(), string.split())).strip()
+# VS
+def capitalize_words(sentence):
+    return ''.join(word.capitalize() for word in sentence.split()).strip()
+
+def generate_hashtag_v1(s):
+    if not s:
+        return False
+    
+    rtn = '#'
+    rtn += cap_word(s)   
+    if len(rtn) > 140:
+        return False
+    return rtn
+
+def generate_hashtag_v2(s):
+    output = "#"
+    
+    for word in s.split():
+        output += word.capitalize()
+    
+    return False if (len(s) == 0 or len(output) > 140) else output
+
+def generate_hashtag_v3(s):
+    ans = '#'+ str(s.title().replace(' ',''))
+    return s and not len(ans)>140 and ans or False
+
 ####################################
 ft_date = {
     '0712': ft_0712,
