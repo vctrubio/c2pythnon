@@ -164,6 +164,21 @@ def expanded_int(num):
     result = ' + '.join(expanded_digits)
     return result
 
+# step tower
+def tower_builder(n_floors):
+    if n_floors == 0:
+        return []
+        
+    step = 2
+    result = []
+
+    for i in range(1, n_floors + 1):
+        stars = '*' * (step * i - 1)
+        space = ' ' * (n_floors - i)
+        result.append(space + stars + space)
+    
+    return result
+
 ####################################
 ft_date = {
     '0712': ft_0712,
