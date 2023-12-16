@@ -22,3 +22,18 @@ def parse_int(s):
 
     total += current_number
     return total
+
+
+def strip_comments(strng, markers):
+    rtn = []
+    
+    for line in strng.split('\n'):
+        for marker in markers:
+            index = line.find(marker)
+            if index != -1:
+                line = line[:index]
+                break  
+        print(line)
+        rtn.append(line.rstrip())
+    
+    return '\n'.join(rtn)
