@@ -19,6 +19,11 @@ class Location:
     _longitude: float = 0
     _address: str = field(default=None)
 
+    def __init__(self, **kwargs):
+        self.id = Location.id
+        Location.id += 1
+        self.__dict__.update(kwargs)
+
 
 @dataclass
 class Day:
@@ -69,7 +74,6 @@ def if_key_in_class(key, Class):
 
 
 def if_key_in_class_model_name(key, model_name):
-    # search_filter = key[1:]
     search_filter = key
     print(f'debug: model_name {search_filter} :vs: {model_name}')
     return search_filter in model_name
@@ -82,10 +86,7 @@ def json_to_class_population(data, Class):
                 iterate_dict(value)
             else:
                 if_key_in_class(key, Class)
-
     iterate_dict(data)
-
-# parse json into models
 
 
 def parse_json_into_models(data_from_json):
@@ -98,8 +99,6 @@ def parse_json_into_models(data_from_json):
         if '_model' in values:
             if (values['_model']) in class_names:
                 class_constructor.append(values)
-                # print('yes')
-                # print(f'OK: {values["_model"]} in ')
 
     for it in class_constructor:
         try:
@@ -110,22 +109,17 @@ def parse_json_into_models(data_from_json):
                 if attr.startswith('_'):
                     attr_trim = attr[1:]
                     if attr_trim in it:
-                        filter_dict_keys[attr_trim] = it[attr_trim]
-            print(filter_dict_keys)
+                        key = '_' + attr_trim
+                        filter_dict_keys[key] = it[attr_trim]
+            # init class/model
+            test = Location(**filter_dict_keys)             #print('goooooood. we got :', test) ####
+            ## todo, make tuple of dict and class .... print(cls.__name__)
+            
         except KeyError:
             print(
                 f'KeyError: {it["_model"]} not found in globals() | SOMETHING WENT WRONG')
 
-        # clean unecesrray keys
-        # call constructor as dict
-
 
 if __name__ == '__main__':
-    data_from_json = get_json()
+    data_from_json = get_json()                             #print(data_from_json)
     constructor = parse_json_into_models(data_from_json)
-
-#    print(data_from_json)
-#    json_to_class_population(data_from_json, Location)
-
-
-#    print(Location.__name__)
