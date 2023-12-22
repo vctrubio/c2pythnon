@@ -1,1 +1,3 @@
 pip install psycopg2-binary sqlmodel
+pip install fastapi uvicorn
+brew install python-tk

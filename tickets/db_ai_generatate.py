@@ -104,6 +104,7 @@ def main_loop():
             else:
                 print("Invalid choice. Please enter a number between 1 and 5.")
 
+##################################GUI#####################################################
 import tkinter as tk
 from tkinter import messagebox
 
@@ -165,7 +166,7 @@ class TicketManagerApp:
         for ticket in tickets:
             self.listbox.insert(tk.END, f"{ticket.id}: {ticket.name} - ${ticket.price}")
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = TicketManagerApp(root)
-    root.mainloop()
+# if __name__ == "__main__":
+#     root = tk.Tk()
+#     app = TicketManagerApp(root)
+#     root.mainloop()
