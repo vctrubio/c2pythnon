@@ -1,5 +1,5 @@
 from interface import *
-from db import *
+from db_ai_generatate import *
 
 if __name__ == '__main__':
-    main()
+    main_loop()
