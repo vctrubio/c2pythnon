@@ -1,9 +1,11 @@
+import inspect
 from typing import Optional
 from enum import Enum
 from sqlmodel import Field, SQLModel, create_engine, Session
 
+# psql -U client -d tickets_python -p 5432
 DATABASE_URL = "postgresql://client:password@localhost:5432/tickets_python"
-# psql -U client -d tickets_python -p 5431
+engine = create_engine(DATABASE_URL)
 
 class Category(Enum):
     A = 1 #Jardeniria
@@ -20,9 +22,14 @@ class Ticket(SQLModel, table=True):
     category: Category = Field(default=Category.D)
     quantity: int = Field(default=1)
 
-engine = create_engine(DATABASE_URL)
-SQLModel.metadata.create_all(engine)
 
+def db_delete():
+    SQLModel.metadata.drop_all(engine)
+
+def db_create():
+    SQLModel.metadata.create_all(engine)
+
+    
 def add(*args):
     with Session(engine) as session:
         for i in args:
@@ -30,8 +37,16 @@ def add(*args):
             session.commit()
             print(i, ' :commited')
     
+def show():
+    with Session(engine) as session:
+        tickets = session.query(Ticket).all()
+        for i in tickets:
+            print(i)
 
 def main():
     t_one = Ticket(name='Oliva', price=22)
     t_two = Ticket(name='Pan', price=4)
+    db_delete()
+    db_create()
     add(t_one, t_two)
+    show()
