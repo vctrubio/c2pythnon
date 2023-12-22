@@ -16,6 +16,7 @@ class Category(Enum):
 
 
 class Ticket(SQLModel, table=True):
+    __table_args__ = {'extend_existing': True}
     id: int = Field(primary_key=True)
     name: str = Field(nullable=False)
     price: float = Field(nullable=False)
@@ -102,3 +103,69 @@ def main_loop():
                     
             else:
                 print("Invalid choice. Please enter a number between 1 and 5.")
+
+import tkinter as tk
+from tkinter import messagebox
+
+class TicketManagerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Ticket Manager")
+
+        # Add Ticket Entry Widgets
+        tk.Label(root, text="Name:").grid(row=0, column=0)
+        self.name_entry = tk.Entry(root)
+        self.name_entry.grid(row=0, column=1)
+
+        tk.Label(root, text="Price:").grid(row=1, column=0)
+        self.price_entry = tk.Entry(root)
+        self.price_entry.grid(row=1, column=1)
+
+        tk.Button(root, text="Add Ticket", command=self.add_ticket).grid(row=2, column=0, columnspan=2, pady=10)
+
+        # Ticket Listbox
+        self.listbox = tk.Listbox(root, width=40, height=10)
+        self.listbox.grid(row=3, column=0, columnspan=2, pady=10)
+
+        # Buttons for Update and Delete
+        tk.Button(root, text="Update Price", command=self.update_ticket).grid(row=4, column=0, pady=5)
+        tk.Button(root, text="Delete Ticket", command=self.delete_ticket).grid(row=4, column=1, pady=5)
+
+        # Print All Tickets Button
+        tk.Button(root, text="Print All Tickets", command=self.print_all_tickets).grid(row=5, column=0, columnspan=2, pady=10)
+
+    def add_ticket(self):
+        name = self.name_entry.get()
+        price = float(self.price_entry.get())
+        add_ticket(Session(bind=engine), name, price)
+        self.update_listbox()
+
+    def update_ticket(self):
+        selected_index = self.listbox.curselection()
+        if selected_index:
+            ticket_id = int(selected_index[0]) + 1  # Adjust the index for 1-based ID
+            new_price = float(self.price_entry.get())
+            update_ticket_price(Session(bind=engine), ticket_id, new_price)
+            self.update_listbox()
+
+    def delete_ticket(self):
+        selected_index = self.listbox.curselection()
+        if selected_index:
+            ticket_id = int(selected_index[0]) + 1  # Adjust the index for 1-based ID
+            delete_ticket(Session(bind=engine), ticket_id)
+            self.update_listbox()
+
+    def print_all_tickets(self):
+        print_all_tickets(engine, Session(bind=engine))
+        self.update_listbox()
+
+    def update_listbox(self):
+        self.listbox.delete(0, tk.END)
+        tickets = get_all_tickets(Session(bind=engine))
+        for ticket in tickets:
+            self.listbox.insert(tk.END, f"{ticket.id}: {ticket.name} - ${ticket.price}")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TicketManagerApp(root)
+    root.mainloop()
