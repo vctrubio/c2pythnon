@@ -62,8 +62,9 @@ def menu():
     print('u or "update"')
     print('c or "clear"')
 
+
+
 def run():
-    print('ello')
     while True:
         menu()
         str = input('>')
