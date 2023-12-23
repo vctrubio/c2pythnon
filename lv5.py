@@ -35,7 +35,6 @@ def is_solved(board):
     if all(value != 0 for row in board for value in row):
         return 0  # Cat's game
     return -1
-
 '''
 All function - all(value == row[0] and value != 0 for value in row)
 for value in row: This part is a generator expression that iterates over each value in the row.
@@ -45,7 +44,16 @@ value == row[0] and value != 0: This is the condition that each value in the row
 all(...): The all() function takes an iterable (in this case, the generator expression) and returns True if all elements in the iterable are true.
 '''
 
-
+#beer pyramid where bonus is the total money and price is price per beer_can, thus we need to stack them up as a pyramid
+def beeramid(bonus, price):
+    cans = bonus // price 
+    level = 0
+    total_cans_used = 0
+    
+    while total_cans_used <= cans:
+        level +=1
+        total_cans_used += max(0, level**2)  # Ensure that negative values are treated as 0
+    return 0 if level == 0 else level - 1
 
 if __name__ == '__main__':
     print('run lv5.')
