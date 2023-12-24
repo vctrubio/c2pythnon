@@ -1,9 +1,9 @@
 from dash import Dash, html, dcc, Input, Output, State
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
-from dash_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Session
-from controller import Ticket, add_ticket, delete_ticket, print_all_tickets, engine
+from controller import Ticket, add_ticket, delete_ticket, print_all_tickets, engine, get_all_tickets
 
 app = Dash(__name__)
 

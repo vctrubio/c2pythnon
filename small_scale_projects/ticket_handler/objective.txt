@@ -1,0 +1,5 @@
+Goal is to use pony, flask, fastapi, postgress and (frontend?react?)
+
+pony to connect to the db - postgress
+flask to create webpage and fastapi to crud operations
+frontend = react to have good UI (this is last)
