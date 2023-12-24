@@ -7,3 +7,9 @@ relationship ticket>:user
 
 ticket>: has one user
 user<: has many tickets
+
+
+#UserStory
+    -create tickets with name and price
+    -each ticket has one user
+    -group tickets in the ui, which should effect the db
