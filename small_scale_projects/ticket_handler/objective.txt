@@ -13,3 +13,9 @@ user<: has many tickets
     -create tickets with name and price
     -each ticket has one user
     -group tickets in the ui, which should effect the db
+
+
+todo today
+    -fastapi
+    -link to db
+    -front end form 
