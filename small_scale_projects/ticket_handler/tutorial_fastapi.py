@@ -12,7 +12,6 @@ class Category(Enum):
     GASOIL = "gasoil"
     MAISON = "maison"
 
-
 class Ticket(BaseModel):
     name: str  # = Field(unique=True)
     price: float

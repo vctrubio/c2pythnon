@@ -1,40 +1,37 @@
-from typing import List, Optional
-from sqlmodel import SQLModel, Field, Relationship, create_engine, Session
+from typing import Required, Set
+from pony.orm import *
 
 
-# has many tickets
-class Ticket(SQLModel):
-    price: int
-    name: str
-    paid: bool = Field(default=False)
-    user: 'User' #= Relationship(back_populates="tickets")
+db = Database()
+class User(db.Entity):
+    username = Required(str, unique=True)
+    tickets = Set('Ticket')
 
-    def user_id(self):
-        return self.user.username
-
-class User(SQLModel):
-    username: str = Field(unique=True)
-    tickets: List['Ticket'] = Relationship(back_populates="user")
-
-    
-class GroupTicket(SQLModel):
-    tickets: List[Ticket] = []
-    total_price: Optional[int] = None
-
-'''
-The back_populates parameter is used to set up a two-way relationship. 
-This means that you can access the User of a Ticket through the user field, 
-and you can access the Tickets of a User through the tickets field.
-'''
-Ticket.user = Relationship(back_populates="tickets")
+class Ticket(db.Entity):
+    price = Required(int)
+    name = Required(str)
+    paid = Optional(bool, default=False)
+    user = Required(User)
+    # quantity category
 
 if __name__ == '__main__':
-    migel = User(username='migel')
-    myticket = Ticket(name="11", price=11, user=migel)
-    mygroup = GroupTicket()
-    u = myticket.user
-    # print(myticket.user_id())
-    print(migel)
 
-    # print(myticket.user_id())
-    # print(mygroup)
+    try:
+        db.bind(provider='postgres', user='client', password='password', host='localhost', database='tickets_python')
+        db.generate_mapping(create_tables=True)
+
+        # Try to perform a database operation
+        with db_session:
+            User.select()[:1]
+        print("Database connection successful.")
+    except Exception as e:
+        print(f"Database connection failed: {e}")
+
+    print('Hello')
+
+
+''' PONY DOC
+Relationships in Pony are always defined by two attributes which represent both sides of a relationship.
+many-to-many relationship between two entities, we should declare two Set attributes at both ends. 
+
+'''
