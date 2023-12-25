@@ -1,6 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List, Annotated
+from typing import List, Annotated, Optional
 import model
 from db import engine, SessionLocal
 from sqlalchemy.orm import Session
@@ -10,17 +10,16 @@ app = FastAPI()
 model.Base.metadata.create_all(bind=engine)
 
 
+class ApiPerson(BaseModel):
+    name: str
+    # tickets: List['ApiTicket'] = None
+
 class ApiTicket(BaseModel):
     name: str
     price: int
     quantity: int = 1
     paid: bool
-
-
-class ApiPerson(BaseModel):
-    name: str
-    tickets: List['ApiTicket'] = []
-
+    person_id: int
 
 def get_db():
     db = SessionLocal()
@@ -41,6 +40,11 @@ async def create_ticket(ticket: ApiTicket, db: db_dependency):
     db.commit()
     db.refresh(db_ticket)
     return db_ticket
+
+
+@app.get('/')
+async def get_tickets(db: db_dependency):
+    return db.query(model.Ticket).all()
 
 
 @app.get('/tickets/{ticket_id}')
