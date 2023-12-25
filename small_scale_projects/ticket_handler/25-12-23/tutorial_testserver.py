@@ -20,3 +20,7 @@ import requests
 # print("Deleting the new item:")
 # print(requests.delete(
 #         "http://127.0.0.1:8000/tickets/2").json())
+
+print(requests.post(
+        "http://127.0.0.1:8000/create_ticket/",
+        json={"name": "ticket7", "user": "hernansh", "price": 30.0, "category": "jardin"}).json())

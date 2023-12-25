@@ -6,3 +6,8 @@ define of models
 # 25 Dec
 FastAPI CRUD working for tickets
 Pony working with postgress
+
+
+
+# 26 Dec
+SQLArchamy

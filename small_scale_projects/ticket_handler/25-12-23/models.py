@@ -66,12 +66,15 @@ def add_user_to_db(user="hernansh"):
     Who(username=user)
 
 
-db.bind(provider='postgres', user='client', password='password',
-        host='localhost', database='tickets_python')
-db.generate_mapping(create_tables=True)
+def connect_to_db():
+    db.bind(provider='postgres', user='client', password='password',
+            host='localhost', database='tickets_python')
+    db.generate_mapping(create_tables=True)
+
 
 if __name__ == '__main__':
     # add_user_to_db()
+    connect_to_db()
     add_ticket_to_db(price=1113, name="fannyboys")
     try:
         print_all_ticket()

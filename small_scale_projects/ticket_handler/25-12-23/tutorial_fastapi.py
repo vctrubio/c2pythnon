@@ -17,7 +17,6 @@ class Ticket(BaseModel):
     price: float
     category: Category
 
-
 # create seeds
 ticket1 = Ticket(name="ticket1", price=10.0, category=Category.JARDIN)
 ticket2 = Ticket(name="ticket2", price=10.0, category=Category.GASOIL)
