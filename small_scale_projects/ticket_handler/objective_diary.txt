@@ -1,3 +1,8 @@
 # 24 Dec
 Init of project
 define of models
+
+
+# 25 Dec
+FastAPI CRUD working for tickets
+Pony working with postgress
