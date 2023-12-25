@@ -30,7 +30,6 @@ def print_all_user():
     for u in User.select():
         print(u.username)
 
-@db_session
 def print_all_ticket():
     for u in Ticket.select():
         print(u.user.username, u.name)
