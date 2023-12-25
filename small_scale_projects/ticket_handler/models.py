@@ -30,22 +30,32 @@ def print_all_user():
     for u in User.select():
         print(u.username)
 
+@db_session
 def print_all_ticket():
     for u in Ticket.select():
-        print(u.user.username, u.name)
-    
+        print(u.user.username, u.name, u.price, u.paid)
+
+@db_session
+def delete_all_tickets():
+    Ticket.select().delete(bulk=True)
+
 if __name__ == '__main__':
     try:
         db.bind(provider='postgres', user='client', password='password', host='localhost', database='tickets_python')
         db.generate_mapping(create_tables=True)
         # Try to perform a database operation
+        delete_all_tickets()
         with db_session:
-            me = User.select()[:1]
-            me = me[0]
-            print(me.username)
+            # me = User.select()[:1]
+            # me = me[0]
+            # print(me.username)
+
+            tictic = Ticket(price=10, paid=True, name='balling', user=1)
             # i = select(p for p in Ticket if p.price > 8)
             # for p in i:
             #     print(p.name)
+        print_all_ticket()
+        # print_all_user()
         print("Database connection successful.")
     except Exception as e:
         print(f"Database connection failed: {e}")
