@@ -1,0 +1,6 @@
+# what i did
+-npx react
+-import bootstrap tag in <head>
+-import bootstrap script in <body>
+-axios in api.js
+-facilitate orm of fastapi to open up connection on port 8000

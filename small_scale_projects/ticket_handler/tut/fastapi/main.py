@@ -62,3 +62,8 @@ async def read_transaction(db: db_depenency, skip: int = 0, limit: int = 100):
     return db.query(models.Transaction).offset(skip).limit(limit).all()
 
 
+@app.delete('/transactions/{transaction_id}')
+async def delete_transaction(transaction_id: int, db: db_depenency):
+    db.query(models.Transaction).filter(models.Transaction.id == transaction_id).delete()
+    db.commit()
+    return {'message': 'Transaction deleted!'}

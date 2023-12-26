@@ -38,6 +38,15 @@ const App = () => {
       return;
     }
 
+    const deleteTransaction = async (id) => {
+      try {
+        await api.delete(`/transactions/${id}`);
+        setTransactions(transactions.filter(transaction => transaction.id !== id));
+      } catch (error) {
+        console.error('Error deleting transaction:', error);
+      }
+    };
+
     try {
       await api.post('/transactions/', formData);
       fetchTransactions();
@@ -100,6 +109,7 @@ const App = () => {
         <table className='table table-striped table-bordered table-hover'>
           <thead>
             <tr>
+              <th scope='col'>ID</th>
               <th scope='col'>Amount</th>
               <th scope='col'>Category</th>
               <th scope='col'>Description</th>
@@ -109,6 +119,7 @@ const App = () => {
           <tbody>
             {transactions.map((transaction) => (
               <tr key={transaction.id}>
+                <td>{transaction.id}</td>
                 <td>{transaction.amount}</td>
                 <td>{transaction.category}</td>
                 <td>{transaction.description}</td>

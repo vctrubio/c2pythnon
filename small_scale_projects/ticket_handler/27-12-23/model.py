@@ -11,7 +11,7 @@ class Ticket(Base):
     quantity = Column(Integer, nullable=False, default=1)
     paid = Column(Boolean, nullable=False, default=False)
     person_id = Column(Integer, ForeignKey('persons.id'))
-    # person = relationship("Person", back_populates="tickets")
+    person = relationship("Person", back_populates="tickets")
 
     def __repr__(self):
         return f'<Ticket {self.id} {self.title} {self.description} {self.done} {self.user_id}>'
