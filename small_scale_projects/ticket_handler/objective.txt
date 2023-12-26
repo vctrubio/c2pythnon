@@ -16,6 +16,4 @@ user<: has many tickets
 
 
 todo today
-    -fastapi
-    -link to db
     -front end form 

@@ -79,6 +79,11 @@ def ips_between(start, end):
 
     return result
 
+def double_letters(string):
+    print(string)
+    zz = zip(string, string[1:])
+    ptr = any([a == b for a, b in zz])
+    return ptr
 
 if __name__ == '__main__':
-    print('run lv5.')
+    double_letters('hello')
