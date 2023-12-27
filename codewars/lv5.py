@@ -20,8 +20,6 @@ def dir_reduc_v2(arr):
     return dir_reduc_v2(dir3) if len(dir3) < len(arr) else dir3
 
 # Tic Tak Toe validator
-
-
 def is_solved(board):
     for row in board:
         if all(value == row[0] and value != 0 for value in row):
@@ -86,4 +84,4 @@ def double_letters(string):
     return ptr
 
 if __name__ == '__main__':
-    double_letters('hello')
+    pass
